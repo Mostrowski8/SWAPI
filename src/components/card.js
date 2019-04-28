@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import Stats from './stats';
 
-class Planetcard extends Component {
+class Card extends Component {
 
     componentDidMount() {
             $('.number-stats').each(function () {
@@ -23,20 +23,16 @@ class Planetcard extends Component {
                     }
                 });
             });
-            let str = $('.stat-string').text();
-            let spans = '<span>' + str.split(/\s+/).join(' </span><span>') + '</span>';
-            $(spans).hide().appendTo('body').each(function (i) {
-                $(this).delay(1000 * i).fadeIn();
-            });
+            
     }
     
     render(){
-    const planet = this.props.planet;
-    let statslist = Object.keys(planet).map(objkey=>{return {name:objkey, value:planet[objkey]}});
+    const resultitem = this.props.resultitem;
+    let statslist = Object.keys(resultitem).map(objkey=>{return {name:objkey, value:resultitem[objkey]}});
     let renderstatlist =  statslist.map(stat=><Stats key={stat.name} name={stat.name} stat={stat.value}/>);
 
         return(
-          <div>
+          <div className='card'>
     {renderstatlist}
             <br></br>
           </div>
@@ -44,4 +40,4 @@ class Planetcard extends Component {
       }
     }
 
-    export default Planetcard
+    export default Card
