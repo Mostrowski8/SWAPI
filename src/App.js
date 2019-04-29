@@ -3,31 +3,32 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import Page from './components/page';
 import $ from 'jquery';
+import Loader from './components/loder'
 
 class App extends Component {
   state={
     stateloaded: false
   }
 
-
 componentDidMount() {
-  $('.loading-icon').show();
-  axios.get(`https://swapi.co/api/`)
-    .then(response => {
-      console.log("response data", response.data);
-      this.handleCreateState(response.data);
-      $('.loading-icon').hide();
-      this.setState({
-        stateloaded: true
-        })
-    })
-    .catch(error => {
-      console.log(error);
-      $('.loading-icon').hide();
-      $('.error').show();
-    });
+  if (this.state.stateloaded===false) {
+    $('.loading-icon').show();
+    axios.get(`https://swapi.co/api/`)
+      .then(response => {
+        console.log("response data", response.data);
+        this.handleCreateState(response.data);
+        $('.loading-icon').hide();
+        this.setState({
+          stateloaded: true
+          })
+      })
+      .catch(error => {
+        console.log(error);
+        $('.loading-icon').hide();
+        $('.error').show();
+      });
+  } 
 }
-
 
 handleCreateState = (data) => {
   Object.keys(data).forEach(
@@ -40,16 +41,13 @@ handleCreateState = (data) => {
       }
     })
   )
-  
-
   console.log(this.state);
 };
 
-
-  handleGet = (route, data, next) => {
-      this.setState({[route]: {...this.state[route], results:data, next:next}});
-    }
-    
+handleGet = (route, data, next) => {
+  this.setState({[route]: {...this.state[route], results:data, next:next}});
+}
+ 
 handleNext = (route, page) => {
   $('.loading-icon').show();
   $('.card').hide();
@@ -88,11 +86,8 @@ axios.get(nextpage)
 });
 }
 
+render () {
 
-
-  render () {
-
-    
     let routes = Object.keys(this.state).map(routename=><Route key={routename}  path={`/${routename}`} render={(routeProps)=><Page {...routeProps} back={this.state[routename].back} next={this.state[routename].next} page={this.state[routename].page} handleBack={this.handleBack} handleNext={this.handleNext} handleGet={this.handleGet} route={routename} results={this.state[routename].results}/>} />);
       
     return (
@@ -125,24 +120,21 @@ axios.get(nextpage)
            </ul>
          </nav>
        </div>
+      {!this.state.stateloaded && <Loader />} 
        <Route exact={true} path="/" component={Index} />
         {this.state.stateloaded && routes}
-
      </Router>
-
     </div>
   )
   }
 }
 
 class Index extends Component {
-
   render(){
     return(
       <div>Index</div>
     )
   }
 }
-
 
 export default App;

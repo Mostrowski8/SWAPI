@@ -15,7 +15,7 @@ class Page extends Component {
           axios.get(`https://swapi.co/api/${this.props.route}/`)
           .then(response => {
             console.log(response.data);
-            this.props.handleGet(this.props.route, response.data.results, this.props.next, this.props.back);
+            this.props.handleGet(this.props.route, response.data.results, response.data.next);
             $('.loading-icon').hide();
           })
           .catch(error => {
@@ -44,7 +44,8 @@ let route = this.props.route;
           <Loader />
           <Error />
           {resultslist}</div>
-         
+          {this.props.back &&<button onClick={()=>this.props.handleBack(route, this.props.page)}>Back</button>}
+          {this.props.next && <button onClick={()=>this.props.handleNext(route, this.props.page)}>Next</button>} 
           </div>
         )
       }
