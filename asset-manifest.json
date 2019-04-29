@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/SWAPI/static/css/main.795991f2.chunk.css",
+    "main.js": "/SWAPI/static/js/main.33537473.chunk.js",
+    "main.js.map": "/SWAPI/static/js/main.33537473.chunk.js.map",
+    "runtime~main.js": "/SWAPI/static/js/runtime~main.6b66c857.js",
+    "runtime~main.js.map": "/SWAPI/static/js/runtime~main.6b66c857.js.map",
+    "static/js/2.b79b536b.chunk.js": "/SWAPI/static/js/2.b79b536b.chunk.js",
+    "static/js/2.b79b536b.chunk.js.map": "/SWAPI/static/js/2.b79b536b.chunk.js.map",
+    "index.html": "/SWAPI/index.html",
+    "precache-manifest.ade443586cb1694569dadc5d14931bb2.js": "/SWAPI/precache-manifest.ade443586cb1694569dadc5d14931bb2.js",
+    "service-worker.js": "/SWAPI/service-worker.js",
+    "static/css/main.795991f2.chunk.css.map": "/SWAPI/static/css/main.795991f2.chunk.css.map",
+    "static/media/crash.gif": "/SWAPI/static/media/crash.5d012708.gif"
+  }
+}
