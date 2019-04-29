@@ -7,7 +7,8 @@ import Loader from './components/loder'
 
 class App extends Component {
   state={
-    stateloaded: false
+    stateloaded: false,
+    routes: {}
   }
 
 componentDidMount() {
@@ -33,19 +34,21 @@ componentDidMount() {
 handleCreateState = (data) => {
   Object.keys(data).forEach(
     route => this.setState({
-      [route]: {
-        results: null,
-        page: 1,
-        next: true,
-        back: false
-      }
+      routes:{ ...this.state.routes,
+        [route]: {
+          results: null,
+          page: 1,
+          next: true,
+          back: false
+        }
+      } 
     })
   )
   console.log(this.state);
 };
 
 handleGet = (route, data, next) => {
-  this.setState({[route]: {...this.state[route], results:data, next:next}});
+  this.setState({routes: {...this.state.routes, [route]: {...this.state.routes[route], results:data, next:next}}});
 }
  
 handleNext = (route, page) => {
@@ -57,8 +60,8 @@ axios.get(nextpage)
   $('.loading-icon').hide();
   $('.card').show();
   this.handleGet(route, response.data.results);
-    response.data.next===null? this.setState({[route]:{...this.state[route], next: false, page:page+1}}):this.setState({[route]:{...this.state[route], next: true, page:page+1}});
-    response.data.previous===null? this.setState({[route]: {...this.state[route], back: false, page:page+1}}):this.setState({[route]:{...this.state[route], back: true, page:page+1}}); 
+    response.data.next===null? this.setState({routes:{...this.state.routes, [route]:{...this.state.routes[route], next: false, page:page+1}}}):this.setState({routes:{...this.state.routes, [route]:{...this.state.routes[route], next: true, page:page+1}}});
+    response.data.previous===null? this.setState({routes:{...this.state.routes, [route]: {...this.state.routes[route], back: false, page:page+1}}}):this.setState({routes:{...this.state.routes, [route]:{...this.state.routes[route], back: true, page:page+1}}}); 
 })
 .catch(error => {
   console.log(error);
@@ -76,8 +79,8 @@ axios.get(nextpage)
   $('.loading-icon').hide();
   $('.card').show();
   this.handleGet(route, response.data.results);
-  response.data.next===null? this.setState({[route]: {...this.state[route], next: false, page:page-1}}):this.setState({[route]:{...this.state[route], next: true, page:page-1}});
-  response.data.previous===null? this.setState({[route]:{...this.state[route], back: false, page:page-1}}):this.setState({[route]:{...this.state[route], back: true, page:page-1}});
+  response.data.next===null? this.setState({routes:{...this.state.routes, [route]: {...this.state.routes[route], next: false, page:page-1}}}):this.setState({routes:{...this.state.routes, [route]:{...this.state.routes[route], next: true, page:page-1}}});
+  response.data.previous===null? this.setState({routes:{...this.state.routes, [route]:{...this.state.routes[route], back: false, page:page-1}}}):this.setState({routes:{...this.state.routes, [route]:{...this.state.routes[route], back: true, page:page-1}}});
 })
 .catch(error => {
   console.log(error);
@@ -88,7 +91,7 @@ axios.get(nextpage)
 
 render () {
 
-    let routes = Object.keys(this.state).map(routename=><Route key={routename}  path={`/${routename}`} render={(routeProps)=><Page {...routeProps} back={this.state[routename].back} next={this.state[routename].next} page={this.state[routename].page} handleBack={this.handleBack} handleNext={this.handleNext} handleGet={this.handleGet} route={routename} results={this.state[routename].results}/>} />);
+    let routes = Object.keys(this.state.routes).map(routename=><Route key={routename}  path={`/${routename}`} render={(routeProps)=><Page {...routeProps} back={this.state.routes[routename].back} next={this.state.routes[routename].next} page={this.state.routes[routename].page} handleBack={this.handleBack} handleNext={this.handleNext} handleGet={this.handleGet} route={routename} results={this.state.routes[routename].results}/>} />);
       
     return (
     <div className="App">
