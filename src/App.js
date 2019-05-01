@@ -92,41 +92,27 @@ axios.get(nextpage)
 render () {
 
     let routes = Object.keys(this.state.routes).map(routename=><Route key={routename}  path={`/${routename}`} render={(routeProps)=><Page {...routeProps} back={this.state.routes[routename].back} next={this.state.routes[routename].next} page={this.state.routes[routename].page} handleBack={this.handleBack} handleNext={this.handleNext} handleGet={this.handleGet} route={routename} results={this.state.routes[routename].results}/>} />);
-      
+    let links =  Object.keys(this.state.routes).map(routename=><li key={routename}><Link to={`/${routename}`}>{routename}</Link></li>);
+    
     return (
     <div className="App">
-     <Router>
-       <div>
-         <nav>
-           <ul>
-             <li>
-               <Link  to="/">Home</Link>
-             </li>
-             <li>
-               <Link to="/people">People</Link>
-             </li>
-             <li>
-               <Link to="/films">Films</Link>
-             </li>
-             <li>
-               <Link to="/starships">Starships</Link>
-             </li>
-             <li>
-               <Link to="/vehicles">Vehicles</Link>
-             </li>
-             <li>
-               <Link to="/species">Species</Link>
-             </li>
-             <li>
-               <Link to="/planets">Planets</Link>
-             </li>
-           </ul>
-         </nav>
-       </div>
-      {!this.state.stateloaded && <Loader />} 
-       <Route exact={true} path="/" component={Index} />
-        {this.state.stateloaded && routes}
-     </Router>
+    {!this.state.stateloaded && <Loader />} 
+    {this.state.stateloaded && 
+    <Router>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link  to="/">Home</Link>
+          </li>
+          {this.state.stateloaded && links}
+        </ul>
+      </nav>
+    </div>
+    <Route exact={true} path="/" component={Index} />
+     {this.state.stateloaded && routes}
+  </Router>
+    } 
     </div>
   )
   }
