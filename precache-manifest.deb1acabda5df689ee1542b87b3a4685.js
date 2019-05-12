@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "03fd32a38d453490b4a8b9d2cd1ae09b",
+    "revision": "2355b9a2b715ad19093e666494107092",
     "url": "/SWAPI/index.html"
   },
   {
-    "revision": "7e340150ee203f46eaff",
+    "revision": "4e82e2571a9e56f489fa",
     "url": "/SWAPI/static/css/main.795991f2.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SWAPI/static/js/2.36fcfc67.chunk.js"
   },
   {
-    "revision": "7e340150ee203f46eaff",
-    "url": "/SWAPI/static/js/main.d3c0dbbb.chunk.js"
+    "revision": "4e82e2571a9e56f489fa",
+    "url": "/SWAPI/static/js/main.9d3bc3b4.chunk.js"
   },
   {
     "revision": "0e4a1d078765669d17f5",
