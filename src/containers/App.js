@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
-import Page from './components/page';
+import Page from '../components/page';
 import $ from 'jquery';
-import Loader from './components/loder'
+import Loader from '../components/loder';
+import ErrorBoundary from '../components/errorboundary/errorboundary';
 
 class App extends Component {
   state={
@@ -31,18 +32,26 @@ componentDidMount() {
   } 
 }
 
+settotal = (route, total) => {
+  this.setState({routes: {...this.state.routes, [route]: {...this.state.routes[route], total: total-1}}})
+}
+
 handleCreateState = (data) => {
   Object.keys(data).forEach(
-    route => this.setState({
-      routes:{ ...this.state.routes,
-        [route]: {
-          results: null,
-          page: 1,
-          next: true,
-          back: false
-        }
-      } 
-    })
+    route => {
+      this.setState({
+        routes:{ ...this.state.routes,
+          [route]: {
+            results: null,
+            page: 1,
+            next: true,
+            back: false,
+          
+          }
+        } 
+      });
+      this.estimatePages(route);  
+    } 
   )
   console.log(this.state);
 };
@@ -89,6 +98,29 @@ axios.get(nextpage)
 });
 }
 
+estimatePages = (route) => {
+  let totalpages = 1;
+ function checkpages (newcallrout) {
+   return new Promise ((resolve, reject)=>{
+    axios.get(newcallrout).then(response=>{resolve(true)}).catch(err=>{resolve(false)});
+   });
+ } 
+ let recurr = async () => {
+   console.log("recurr fired")
+   totalpages += 1;
+    let newcallrout = `https://swapi.co/api/${route}/?page=${totalpages}`;
+    let pagecall = await checkpages(newcallrout);
+    if (pagecall && totalpages < 10) {
+     recurr()
+    } else {
+      this.settotal(route, totalpages)
+    }
+  }
+  recurr();
+} 
+
+
+
 render () {
 
     let routes = Object.keys(this.state.routes).map(routename=><Route key={routename}  path={`/${routename}`} render={(routeProps)=><Page {...routeProps} back={this.state.routes[routename].back} next={this.state.routes[routename].next} page={this.state.routes[routename].page} handleBack={this.handleBack} handleNext={this.handleNext} handleGet={this.handleGet} route={routename} results={this.state.routes[routename].results}/>} />);
@@ -114,6 +146,7 @@ render () {
   </Router>
     } 
     </div>
+    
   )
   }
 }

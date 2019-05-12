@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import Stats from './stats';
+import ErrorBoundary from './errorboundary/errorboundary';
 
 class Card extends Component {
 
@@ -32,10 +33,12 @@ class Card extends Component {
     let renderstatlist =  statslist.map(stat=><Stats key={stat.name} name={stat.name} stat={stat.value}/>);
 
         return(
+           
           <div className='card'>
     {renderstatlist}
             <br></br>
           </div>
+       
         )
       }
     }
