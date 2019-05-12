@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/SWAPI/static/css/main.795991f2.chunk.css",
-    "main.js": "/SWAPI/static/js/main.4a66454d.chunk.js",
-    "main.js.map": "/SWAPI/static/js/main.4a66454d.chunk.js.map",
+    "main.js": "/SWAPI/static/js/main.e00c29cc.chunk.js",
+    "main.js.map": "/SWAPI/static/js/main.e00c29cc.chunk.js.map",
     "runtime~main.js": "/SWAPI/static/js/runtime~main.6b66c857.js",
     "runtime~main.js.map": "/SWAPI/static/js/runtime~main.6b66c857.js.map",
     "static/js/2.36fcfc67.chunk.js": "/SWAPI/static/js/2.36fcfc67.chunk.js",
     "static/js/2.36fcfc67.chunk.js.map": "/SWAPI/static/js/2.36fcfc67.chunk.js.map",
     "index.html": "/SWAPI/index.html",
-    "precache-manifest.c57480aa294ecb1b18dfd3d06b1718ea.js": "/SWAPI/precache-manifest.c57480aa294ecb1b18dfd3d06b1718ea.js",
+    "precache-manifest.302b6eaf49a3653f7b77f8626513edfb.js": "/SWAPI/precache-manifest.302b6eaf49a3653f7b77f8626513edfb.js",
     "service-worker.js": "/SWAPI/service-worker.js",
     "static/css/main.795991f2.chunk.css.map": "/SWAPI/static/css/main.795991f2.chunk.css.map",
     "static/media/crash.gif": "/SWAPI/static/media/crash.5d012708.gif"
