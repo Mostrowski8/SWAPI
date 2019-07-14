@@ -19,6 +19,7 @@ componentDidMount() {
       .then(response => {
         console.log("response data", response.data);
         this.handleCreateState(response.data);
+      
         $('.loading-icon').hide();
         this.setState({
           stateloaded: true
@@ -123,7 +124,7 @@ estimatePages = (route) => {
 
 render () {
 
-    let routes = Object.keys(this.state.routes).map(routename=><Route key={routename}  path={`/${routename}`} render={(routeProps)=><Page {...routeProps} back={this.state.routes[routename].back} next={this.state.routes[routename].next} page={this.state.routes[routename].page} handleBack={this.handleBack} handleNext={this.handleNext} handleGet={this.handleGet} route={routename} results={this.state.routes[routename].results}/>} />);
+    let routes = Object.keys(this.state.routes).map(routename=><Route key={routename}  path={`/${routename}`} render={(routeProps)=><Page {...routeProps} back={this.state.routes[routename].back} next={this.state.routes[routename].next} page={this.state.routes[routename].page} total={this.state.routes[routename].total} handleBack={this.handleBack} handleNext={this.handleNext} handleGet={this.handleGet} route={routename} results={this.state.routes[routename].results}/>} />);
     let links =  Object.keys(this.state.routes).map(routename=><li key={routename}><Link to={`/${routename}`}>{routename}</Link></li>);
     
     return (
